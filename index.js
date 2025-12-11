@@ -245,8 +245,24 @@ async function run() {
             }
         })
 
-        
+        // Timeline apis
+        app.get('/timeline/:issueId', async (req, res) => {
+            try {
+                const id = req.params.issueId;
 
+                const result = await timelineCollection
+                    .find({ issueId: id })
+                    .sort({ time: -1 })
+                    .toArray();
+
+                res.send(result);
+            }
+            catch (error) {
+                res.status(500).send({ error: error.message });
+            }
+        })
+
+        
         // Send a ping to confirm a successful connection
         await client.db("admin").command({ ping: 1 });
         console.log("Pinged your deployment. You successfully connected to MongoDB!");
