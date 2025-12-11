@@ -262,7 +262,26 @@ async function run() {
             }
         })
 
+        // User Block/Unblock API
+        app.patch('/users/block/:email', async (req, res) => {
+            try {
+                const email = req.params.email;
+                const isBlocked = req.body.isBlocked;
+
+                const result = await usersCollection.updateOne(
+                    { email },
+                    { $set: { isBlocked } }
+                );
+
+                res.send(result);
+            }
+            catch (error) {
+                res.status(500).send({ error: error.message });
+            }
+        })
+
         
+
         // Send a ping to confirm a successful connection
         await client.db("admin").command({ ping: 1 });
         console.log("Pinged your deployment. You successfully connected to MongoDB!");
