@@ -182,6 +182,69 @@ async function run() {
             }
         })
 
+        // Staff Assignment API
+        app.patch('/issues/assign/:id', async (req, res) => {
+            try {
+                const id = req.params.id;
+                const staffEmail = req.body.staffEmail;
+
+                const result = await issuesCollection.updateOne(
+                    { _id: new ObjectId(id) },
+                    { $set: { assignedStaff: staffEmail } }
+                );
+
+                res.send(result);
+            }
+            catch (error) {
+                res.status(500).send({ error: error.message });
+            }
+        })
+
+        // Issue Priority (Boost) API
+        app.patch('/issues/priority/:id', async (req, res) => {
+            try {
+                const id = req.params.id;
+
+                const result = await issuesCollection.updateOne(
+                    { _id: new ObjectId(id) },
+                    { $set: { priority: "high" } }
+                );
+
+                res.send(result);
+
+            }
+            catch (error) {
+                res.status(500).send({ error: error.message });
+            }
+        })
+
+        // Upvote API
+        app.patch('/issues/upvote/:id', async (req, res) => {
+            try {
+                const id = req.params.id;
+                const email = req.body.email;
+
+                const issue = await issuesCollection.findOne({ _id: new ObjectId(id) });
+
+                if (issue.upvoters && issue.upvoters.includes(email)) {
+                    return res.status(400).send({ message: "Already upvoted" });
+                }
+
+                const result = await issuesCollection.updateOne(
+                    { _id: new ObjectId(id) },
+                    {
+                        $inc: { upvotes: 1 },
+                        $addToSet: { upvoters: email }
+                    }
+                );
+
+                res.send(result);
+            }
+            catch (error) {
+                res.status(500).send({ error: error.message });
+            }
+        })
+
         
 
         // Send a ping to confirm a successful connection
