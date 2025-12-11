@@ -297,7 +297,18 @@ async function run() {
             }
         })
 
-       
+        // Payments API
+        app.post('/payments', async (req, res) => {
+            try {
+                const payment = req.body;
+                payment.date = new Date();
+                const result = await paymentsCollection.insertOne(payment);
+                res.send(result);
+            }
+            catch (error) {
+                res.status(500).send({ error: error.message });
+            }
+        })
 
         // Send a ping to confirm a successful connection
         await client.db("admin").command({ ping: 1 });
