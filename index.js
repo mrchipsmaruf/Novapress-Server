@@ -84,7 +84,106 @@ async function run() {
             }
         });
 
+        // ISSUES APIS
+        // CREATE NEW ISSUES
+        app.post('/issues', async (req, res) => {
+            try {
+                let issue = req.body;
+                issue.status = "pending";
+                issue.reportedAt = new Date();
+
+                const result = await issuesCollection.insertOne(issue);
+                res.send(result);
+            }
+            catch (error) {
+                res.status(500).send({ error: error.message });
+            }
+        })
+
+        // GET ALL ISSUES
+        app.get('/issues', async (req, res) => {
+            try {
+                const result = await issuesCollection.find().sort({ priority: -1, reportedAt: -1 }).toArray();
+                res.send(result);
+            }
+            catch (error) {
+                res.status(500).send({ error: error.message });
+            }
+        })
+
+        // GET ISSUES BY REPORTER
+        app.get('/issues/user/:email', async (req, res) => {
+            try {
+                const email = req.params.email;
+                const result = await issuesCollection.find({ reporterEmail: email }).sort({ reportedAt: -1 }).toArray();
+                res.send(result);
+            }
+            catch (error) {
+                res.status(500).send({ error: error.message });
+            }
+        })
+
+        // UPDATE ISSUES STATUS PATCH
+        app.patch('/issues/status/:id', async (req, res) => {
+            try {
+                const id = req.params.id;
+                const status = req.body.status;
+                const result = await issuesCollection.updateOne(
+                    { _id: new ObjectId(id) },
+                    { $set: { status } }
+                );
+
+                res.send(result);
+            }
+            catch (error) {
+                res.status(500).send({ error: error.message });
+            }
+        })
+
+        // DELETE ISSUE
+        app.delete('/issues/:id', async (req, res) => {
+            try {
+                const id = req.params.id;
+                const result = await issuesCollection.deleteOne({ _id: new ObjectId(id) });
+                res.send(result);
+            }
+            catch (error) {
+                res.status(500).send({ error: error.message });
+            }
+        })
+
+        // Issue Details API
+        app.get('/issues/details/:id', async (req, res) => {
+            try {
+                const id = req.params.id;
+                const result = await issuesCollection.findOne({ _id: new ObjectId(id) });
+                res.send(result);
+            }
+            catch (error) {
+                res.status(500).send({ error: error.message });
+            }
+        })
+
+        // Issue Edit API
+        app.patch('/issues/edit/:id', async (req, res) => {
+            try {
+                const id = req.params.id;
+                const updatedData = req.body;
+
+                const result = await issuesCollection.updateOne(
+                    { _id: new ObjectId(id) },
+                    { $set: updatedData }
+                );
+
+                res.send(result);
+            }
+            catch (error) {
+                res.status(500).send({ error: error.message });
+            }
+        })
+
         
+
         // Send a ping to confirm a successful connection
         await client.db("admin").command({ ping: 1 });
         console.log("Pinged your deployment. You successfully connected to MongoDB!");
