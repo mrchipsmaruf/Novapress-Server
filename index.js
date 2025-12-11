@@ -280,7 +280,24 @@ async function run() {
             }
         })
 
-        
+        // Premium Subscription API
+        app.patch('/users/premium/:email', async (req, res) => {
+            try {
+                const email = req.params.email;
+
+                const result = await usersCollection.updateOne(
+                    { email },
+                    { $set: { premium: true } }
+                );
+
+                res.send(result);
+            }
+            catch (error) {
+                res.status(500).send({ error: error.message });
+            }
+        })
+
+       
 
         // Send a ping to confirm a successful connection
         await client.db("admin").command({ ping: 1 });
