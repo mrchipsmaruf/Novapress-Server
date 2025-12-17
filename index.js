@@ -115,6 +115,10 @@ async function run() {
             next();
         });
 
+        app.get("/", (req, res) => {
+            res.send("🚀 NovaPress API is running successfully");
+        });
+
         // -----------------------
         // USER ROUTES
         // -----------------------
@@ -150,7 +154,7 @@ async function run() {
             }
         });
 
-        
+
 
         // =========================
         // USER PROFILE (FINAL, REQUIRED)
@@ -768,7 +772,7 @@ async function run() {
             res.send({ success: true, result });
         });
 
-        
+
 
         // EDIT ISSUE (reporter only)
         app.patch('/issues/edit/:id', verifyToken, async (req, res) => {
