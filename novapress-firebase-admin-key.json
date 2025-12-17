@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "novapress-78470",
+  "private_key_id": "4907e2122719f79cc871d397107bf6349797378d",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDbfRzAyNK2bEoC\nORdRe2vUKleqEt7+rSktJfnNcIQeJy3sZr4UV70qGA7N5H3NZG8aVHE/4gSc5c1k\n2YZ65wLxvy9TiKHRIElIAMA9c+P3G7kHDp+k8TC9HRRfwqaEG9jIMD6Z0eaWN0l9\nh5gtBKvYK+d6KjEOlLz8E0YT/5b74FOcg5YWb5go4NdLSQ3CDZ9/tDMqqnZPXYfo\n5p2xCfYlY/gGYB5FouZynW8gRrA4kARBAY/LaiYv17jwd+zmjzKhJKSuCXiLMsax\nD14Lho1frD9sFS2U2c6T+vNWh0lxSH3pBm2hESW473oE6r0sIZi9j11ATc5jyM4l\nz1+ggFA9AgMBAAECggEALfYLfNUwxpFzh/ajiuUA5es98zfDaWoiSrl+j0YF7HiA\n1dWH7SOYUYW7J+M2crmayFUxZ9Kw65f1hC5Gylqwk6XYx7G/TNbpcYHyv4uSi47L\nFo654GS/M4Kw3wKYMubP5M+xdC1vjzohkf9AXwDw6TH8ZWkLX8XGszRoAs0NNU3X\nds+/G4qjesrnd2OsUDvzjpxgrAxZ84igk03fwEk7vukD77fCqFGhAgyhyYTNedY0\n/FqrbIttb33rAxRZsa5ghZ3Lqc12khzRpwAqHd2KmWVHom/BB3SIkIZqyWRocmMJ\n31rs+O2QU9vMTqVWJIHOzPudMi04/tEU3StK/dYdMQKBgQDys0ewjyTnU/pJgite\nIxI4H95JU5eg0NzxEREcxtg5kxJK0Ary+6Dtzx8A7NInyWIJ+M4A0pz/S5VwUEvv\nAyXXT86EiFKN6SkCaJHmnq6R/FxebZC4cdxgIy2fMYy9ZWmmPcS6IVkVp+emlazJ\nrg0JUeVdA1Yha+CTuzf5n9H2lQKBgQDnhDVlqu0HJ6ltwqPvoAWQm7BIY9ZUTDpa\nuNwYxm9B4XHsUvtVRy+CW9mda87DWcxt3wkrzXFPBKeQ9QXR/puimGS3m5QLhM8m\nh01PBQ73OExABg5GYrFSehxeqNwbRG4Z8veGtor2LRC9T9EBcHt87cwBC0/LaURR\n/ZLfL9PRCQKBgGCbWnL+V7s5I0y1Ytvi6/KpRMs9WgLqgLf4ii5BPHqWf1aGP4V/\nAg0HQBkXK4Qo1jyP7DhJnbLFfGOror4uK5bsLpF0zh+s6uUJiOIa0fRMVtxDkrLI\np+cguZ0/lP0i7A3/UlqgwZwsLLqTo6bYAFpwXfNLS7KcBVXo1RwpMOONAoGBANtl\nZJzWIA05vsvvOh/pS5zAjYvsYL4+BsbWjG1GD0Uleip0cQ1dil5E4LLX6Xci8CHm\nzPAfnpM9W/Z43G0mlSK+vCNrYh6QWyat7ctGheouBcReeMSm3lfEtIHYD84fSR96\nKqwU7RdhmY1tyClPCRdY2ozaxWGEfmQco0SyNE7RAoGAeayFe4UG2xGCitNoMtpt\nMU1SHJMEWT9S4zx2vru26gLgN1GzfEK8J6XVorId+qeObE3sWVGDNyOpphHGpPoB\nMvjRxqjPUvyFen4LmzDY3pZ5iR5wRJ7B18kZuV7Y1C8EWucXdnjTN7Csrhp6zoCS\nQUsEjbCANFhzU2YiOJhQ6Pc=\n-----END PRIVATE KEY-----\n",
+  "client_email": "firebase-adminsdk-fbsvc@novapress-78470.iam.gserviceaccount.com",
+  "client_id": "111170534942572568091",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-fbsvc%40novapress-78470.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
