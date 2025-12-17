@@ -7,7 +7,7 @@ const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 const admin = require("./firebaseAdmin");
 
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT;
 
 app.use(express.json());
 app.use(cors());
@@ -21,6 +21,14 @@ const client = new MongoClient(uri, {
         deprecationErrors: true
     }
 });
+
+app.get("/", (req, res) => {
+    res.status(200).json({
+        success: true,
+        message: "🚀 NovaPress API is running on Vercel"
+    });
+});
+
 
 // Minimal auth middleware (requires firebase-admin to be initialized)
 async function verifyToken(req, res, next) {
@@ -115,9 +123,6 @@ async function run() {
             next();
         });
 
-        app.get("/", (req, res) => {
-            res.send("🚀 NovaPress API is running successfully");
-        });
 
         // -----------------------
         // USER ROUTES
@@ -1148,9 +1153,6 @@ async function run() {
             }
         });
 
-
-        // Root
-        app.get('/', (req, res) => res.send('NovaPress API is running'));
 
         console.log('Connected to MongoDB and routes are set.');
     } finally {
