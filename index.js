@@ -55,6 +55,7 @@ async function verifyToken(req, res, next) {
                 role: "citizen",
                 premium: false,
                 isBlocked: false,
+                hasPassword: false,
                 createdAt: new Date()
             };
 
@@ -131,34 +132,48 @@ async function run() {
         // Create or upsert user (used after client registers/logins)
         app.post("/users", async (req, res) => {
             try {
-                const { email, name, image } = req.body;
+                const { email, name, image, hasPassword = false } = req.body;
 
                 if (!email) {
                     return res.status(400).send({ message: "Email required" });
                 }
 
-                const exists = await usersCollection.findOne({ email });
-                if (exists) {
-                    return res.send({ message: "User already exists" });
-                }
+                const result = await usersCollection.updateOne(
+                    { email },
+                    {
+                        $setOnInsert: {
+                            email,
+                            name: name || "",
+                            image: image || "",
+                            role: "citizen",
+                            premium: false,
+                            isBlocked: false,
+                            hasPassword,
+                            createdAt: new Date()
+                        }
+                    },
+                    { upsert: true }
+                );
 
-                const newUser = {
-                    email,
-                    name: name || "",
-                    image: image || "",
-                    role: "citizen",
-                    premium: false,
-                    isBlocked: false,
-                    createdAt: new Date()
-                };
-
-                const result = await usersCollection.insertOne(newUser);
-                res.send(result);
+                res.send({ success: true, result });
             } catch (err) {
                 res.status(500).send({ error: err.message });
             }
         });
 
+
+        app.patch("/users/password-set", verifyToken, async (req, res) => {
+            try {
+                await req.usersCollection.updateOne(
+                    { email: req.user.email },
+                    { $set: { hasPassword: true } }
+                );
+
+                res.send({ success: true });
+            } catch (err) {
+                res.status(500).send({ message: "Failed to update password flag" });
+            }
+        });
 
 
         // =========================
