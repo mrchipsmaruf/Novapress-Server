@@ -479,10 +479,7 @@ async function run() {
                 const { page, limit, search, status, priority, category } = req.query;
 
                 const filter = {
-                    $or: [
-                        { isHidden: false },
-                        { isHidden: { $exists: false } }
-                    ]
+                    isHidden: false
                 };
 
                 if (status && status !== "All") filter.status = status;
@@ -947,7 +944,6 @@ async function run() {
             }
         });
 
-        // ISSUES assigned to a staff member (admin or staff themself)
         app.get('/issues/staff/:email', verifyToken, async (req, res) => {
             try {
                 const email = req.params.email;
@@ -960,15 +956,14 @@ async function run() {
                     return res.status(403).send({ message: "Forbidden" });
                 }
 
-                // staff can only see their own issues, admin can see all
                 if (requester.role !== "admin" && requester.email !== email) {
                     return res.status(403).send({ message: "Forbidden" });
                 }
 
-                // ✅ FIXED QUERY
                 const items = await req.issuesCollection.find({
-                    assignedStaff: email,                 // ✅ STRING MATCH
-                    status: { $ne: "closed" }             // hide closed
+                    assignedStaff: email,
+                    isHidden: false,
+                    status: { $ne: "closed" }
                 })
                     .sort({ reportedAt: -1 })
                     .toArray();
