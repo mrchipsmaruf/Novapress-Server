@@ -30,7 +30,6 @@ app.get("/", (req, res) => {
 });
 
 
-// Minimal auth middleware (requires firebase-admin to be initialized)
 async function verifyToken(req, res, next) {
     const header = req.headers.authorization;
 
@@ -364,7 +363,7 @@ async function run() {
             try {
                 const issue = req.body || {};
                 issue.reporterEmail = req.user.email;
-                issue.userEmail = req.user.email; // friendly field used in front-end
+                issue.userEmail = req.user.email;
 
                 const user = await usersCollection.findOne({ email: req.user.email });
                 const issueCount = await issuesCollection.countDocuments({ reporterEmail: req.user.email });
@@ -473,7 +472,6 @@ async function run() {
             res.send(issues);
         });
 
-        // GET ALL ISSUES (public)
         app.get('/issues', async (req, res) => {
             try {
                 const { page, limit, search, status, priority, category } = req.query;
