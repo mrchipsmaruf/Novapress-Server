@@ -105,7 +105,6 @@ const VALID_STATUS_FLOW = {
 
 async function run() {
     try {
-        await client.connect();
         const db = client.db('novapress_db');
         const usersCollection = db.collection("users");
         const issuesCollection = db.collection("issues");
